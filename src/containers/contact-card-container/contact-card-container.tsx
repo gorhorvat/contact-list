@@ -13,17 +13,17 @@ interface Props {
 class ContactCardContainer extends Component<Props> {
   render() {
     const {
-      onContactFavorite,
-      onContactEdit,
-      onContactDelete,
+      onContactFavoriteClick,
+      onContactEditClick,
+      onContactDeleteClick,
     } = contactListStore;
 
     return (
       <ContactCard
         contact={this.props.contact}
-        onContactFavorite={onContactFavorite}
-        onContactEdit={onContactEdit}
-        onContactDelete={onContactDelete}
+        onContactFavoriteClick={onContactFavoriteClick}
+        onContactEditClick={onContactEditClick}
+        onContactDeleteClick={onContactDeleteClick}
       />
     );
   }

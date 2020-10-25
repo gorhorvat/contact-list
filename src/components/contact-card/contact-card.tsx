@@ -12,32 +12,56 @@ import './contact-card.less';
 
 interface Props {
   contact: ContactModel;
-  onContactFavorite: (id: number) => void;
-  onContactEdit: (id: number) => void;
-  onContactDelete: (id: number) => void;
+  onContactFavoriteClick: (id: number) => void;
+  onContactEditClick: (id: number) => void;
+  onContactDeleteClick: (id: number) => void;
 }
 
 function ContactCard(props: Props) {
   const {
     contact: { id, fullName, avatar, isFavorite },
-    onContactFavorite,
-    onContactEdit,
-    onContactDelete,
+    onContactFavoriteClick,
+    onContactEditClick,
+    onContactDeleteClick,
   } = props;
 
   return (
     <Card
       className='contact-card'
       hoverable={true}
-      onClick={() => onContactEdit(id)}
+      onClick={() => onContactEditClick(id)}
       actions={[
         isFavorite ? (
-          <HeartFilled key='favorite' onClick={() => onContactFavorite(id)} />
+          <HeartFilled
+            key='favorite'
+            onClick={(event: React.MouseEvent) => {
+              event.stopPropagation();
+              onContactFavoriteClick(id);
+            }}
+          />
         ) : (
-          <HeartOutlined key='favorite' onClick={() => onContactFavorite(id)} />
+          <HeartOutlined
+            key='favorite'
+            onClick={(event: React.MouseEvent) => {
+              event.stopPropagation();
+              onContactFavoriteClick(id);
+            }}
+          />
         ),
-        <EditOutlined key='edit' onClick={() => onContactEdit(id)} />,
-        <DeleteOutlined key='delete' onClick={() => onContactDelete(id)} />,
+        <EditOutlined
+          key='edit'
+          onClick={(event: React.MouseEvent) => {
+            event.stopPropagation();
+            onContactEditClick(id);
+          }}
+        />,
+        <DeleteOutlined
+          key='delete'
+          onClick={(event: React.MouseEvent) => {
+            event.stopPropagation();
+            onContactDeleteClick(id);
+          }}
+        />,
       ]}
     >
       <Avatar src={avatar} shape='circle' size={100} />
